@@ -1,0 +1,81 @@
+\documentclass [11pt]{article}
+
+% \usepackage{lmodern} % Add lmodern package for informal font
+% \renewcommand{\familydefault}{\sfdefault} % Set font family to informal
+% \usefont{T1}{lmss}{m}{n}
+
+
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathabx, bbm}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{float}
+% \usepackage{subfig}
+\usepackage{subfloat}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{pdflscape}
+\usepackage{xcolor}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage[T1]{fontenc}
+\usepackage{bigints}
+
+\usepackage{palatino}
+% \usepackage{lmodern}
+\usepackage{multirow,bigdelim}
+\usepackage{tikz}
+\usepackage{dsfont}
+\usepackage{url}
+
+\usepackage{adjustbox}
+
+\begin{document}
+
+\title{Analytical Results in Demand}
+
+\date{\today}
+\maketitle
+\section*{Part 1: Market demand
+heterogeneity: Quan, Willims (2018)}
+utility for good $j$ in market $l$ by consumer
+$i$ is given by:
+\begin{equation}
+  u_{ijl} = \delta_j - \alpha p_j + 
+  \nu_{ijl}
+\end{equation}
+
+Also, suppose that the structure of the
+error term is as follows:
+\begin{equation}
+  \nu_{ijl}=\eta_{jl}+
+  \underbrace{\zeta_{ic}+
+  \varepsilon_{ijl}}_{GEV(\lambda)}
+\end{equation}
+In other words, we want same goods have 
+different utilities based on the 
+location of the market ($\eta_{jl}$). 
+For example, in 
+Alaska, utility of a snow shovel is higher
+than in Florida. Also, $\zeta_{ic}$ is the 
+individual specific taste for class (or 
+nest $c$).
+
+We are in a nested logit framework. Also,
+the outside option exist alone in its 
+own nest. 
+For the share of each product $j$ as a whole,
+we have $\pi_j = \sum_{l} w_l \pi_{jl}$, 
+where $w_l$ is the share of population in 
+market $l$ and $\pi_{jl}$ is the share of
+product $j$ in market $l$. Notice that, as 
+we are in the nested logit framework, we have:
+
+\begin{equation}
+  \pi_{jl} = \pi_{jl\mid c} \times \pi_{lc}
+\end{equation}
+\end{document}
