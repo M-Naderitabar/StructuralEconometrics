@@ -1,9 +1,8 @@
-\documentclass [11pt]{article}
+\documentclass[12pt]{article}
 
 % \usepackage{lmodern} % Add lmodern package for informal font
 % \renewcommand{\familydefault}{\sfdefault} % Set font family to informal
 % \usefont{T1}{lmss}{m}{n}
-
 
 \usepackage{geometry}
 \usepackage{setspace}
@@ -34,6 +33,9 @@
 
 \usepackage{adjustbox}
 
+% Set line spacing to 1.5
+\setstretch{1.4}
+
 \begin{document}
 
 \title{Analytical Results in Demand}
@@ -42,40 +44,145 @@
 \maketitle
 \section*{Part 1: Market demand
 heterogeneity: Quan, Willims (2018)}
-utility for good $j$ in market $l$ by consumer
-$i$ is given by:
-\begin{equation}
-  u_{ijl} = \delta_j - \alpha p_j + 
-  \nu_{ijl}
-\end{equation}
 
-Also, suppose that the structure of the
-error term is as follows:
+Suppose we are in a nested logit framework within each location. let $c$ index the nests of the products, and the outside option belongs to its own nest. Then, utility for good $j$ in market $l$ by consumer
+$n$ is given by:
 \begin{equation}
-  \nu_{ijl}=\eta_{jl}+
-  \underbrace{\zeta_{ic}+
-  \varepsilon_{ijl}}_{GEV(\lambda)}
+  \boxed{u_{nlj} = \delta_{lj} + \underbrace{\zeta_{nc} + 
+  (1-\lambda)\epsilon_{nlj}}_{GEV(\lambda)
+}}
 \end{equation}
-In other words, we want same goods have 
-different utilities based on the 
-location of the market ($\eta_{jl}$). 
-For example, in 
-Alaska, utility of a snow shovel is higher
-than in Florida. Also, $\zeta_{ic}$ is the 
-individual specific taste for class (or 
-nest $c$).
+Where the error term $\epsilon_{nlj}$ is i.i.d type 1 extreme value. Moreover, the $\zeta_{nc}$, the utility drawn for agent $n$ from nest $c$, is distributed depending on the nesting parameter $\lambda$. Then, according to Cardell (1997), there exists a distribution of $\zeta_{nc}$ which makes $\zeta_{nc} + 
+  (1-\lambda)\epsilon_{nlj}$ GEV, leading to the nested logit model.
 
-We are in a nested logit framework. Also,
-the outside option exist alone in its 
-own nest. 
-For the share of each product $j$ as a whole,
-we have $\pi_j = \sum_{l} w_l \pi_{jl}$, 
-where $w_l$ is the share of population in 
-market $l$ and $\pi_{jl}$ is the share of
-product $j$ in market $l$. Notice that, as 
-we are in the nested logit framework, we have:
+Also, suppose that the mean utility of product $j$ in location $l$ is:
 
 \begin{equation}
-  \pi_{jl} = \pi_{jl\mid c} \times \pi_{lc}
+    \delta_{lj} = x_j \beta - \alpha p_j + \varepsilon_{lj} \,\, ,\,\,
+    \varepsilon_{lj}=\xi_{j} + \eta_{lj}
 \end{equation}
+
+In other words, we want the same goods to have different utilities based on the market's location ($\eta_{lj}$). For example, in Alaska, the utility of a snow shovel is higher than in Florida. So, we can rewrite it as follows:
+\begin{equation}
+    \boxed{
+    \delta_{lj} = \delta_{j} + \eta_{lj} \,\, ,\,\, \delta_{j} = x_j\beta - \alpha p_j + \xi_{j}
+     \,\, ,\,\, \eta_{lj}\sim N\left(0,\sigma^2_j\right)}
+\end{equation}
+
+As the error term in the utility is GEV class, the $G$ function is as follows:
+\begin{equation*}
+    G = \sum_{\ell=1}^K\left(\sum_{j\in B_\ell}e^{\delta_j/(1-\lambda)}\right)^{1-\lambda}
+\end{equation*}
+
+Then, the choice probability for an alternative $i$ in nest $c$ in market $l$ is:
+\begin{align}
+    \pi_{li}  &=\frac{e^{\delta_{li}/(1-\lambda)}\left(\sum_{j\in B_c}e^{\delta_{lj}/(1-\lambda)}\right)^{-\lambda}}{\sum_{\ell=0}^K\left(\sum_{j\in B_\ell}e^{\delta_{lj}/(1-\lambda)}\right)^{1-\lambda}} \nonumber \\
+    & = \underbrace{\frac{e^{\delta_{li}/(1-\lambda)}}{\sum_{j\in B_c}e^{\delta_{lj}/(1-\lambda)}}}_{\pi_{li}|c} \underbrace{\frac{\left(\sum_{j\in B_c}e^{\delta_{lj}/(1-\lambda)}\right)^{1-\lambda}}{\sum_{\ell=0}^K\left(\sum_{j\in B_\ell}e^{\delta_{lj}/(1-\lambda)}\right)^{1-\lambda}}}_{\pi_{lc}}
+\end{align}
+Where, $\pi_{li}$ is the probability of choosing alternative $i$ in market $l$, $\pi_{li|c}$ is the probability of choosing alternative $i$ in market $l$ given nest $c$ is chosen and $\pi_{lc}$ is the probability of choosing nest $c$ in market $l$.
+For simplicity, we can define the following:
+\begin{equation*}
+    \boxed{D_{lc} = \sum_{j\in B_c}e^{\delta_{lj}/(1-\lambda)}}
+\end{equation*}
+Then, the above probability is:
+\begin{equation}
+\boxed{
+    \pi_{li} = \underbrace{\frac{e^{\delta_{li}/(1-\lambda)}}{D_{lc}}}_{\pi_{li|c}} \underbrace{\frac{D_{lc}^{1-\lambda}}{\sum_{\ell=0}^K D_{l\ell}^{1-\lambda}}}_{\pi_{lc}}}
+\end{equation}
+Also, notice that, for the outside option, it is in nest 0. Then, the probability of choosing that nest is:
+\begin{equation}
+    \boxed{\pi_{l0} = \frac{1}{\sum_{\ell=0}^K D_{l\ell}^{1-\lambda}}}
+\end{equation}
+Then, we can see that:
+\begin{equation}
+    \boxed{D_{lc} = \left(\frac{\pi_{lc}}{\pi_{l0}}\right)^{\frac{1}{1-\lambda}}}
+\end{equation}
+Suppose $w_l$ is the share of the population who live in market $l$. Then, $\pi_{i}$, which is the nationwide share of alternative $i$ is just the weighted sum of all $\pi_{li}$. In other words:
+\begin{equation}
+    \pi_{i} = \sum_{l} w_l \pi_{li} = \sum_{l} w_l \pi_{li|c} \pi_{lc}\nonumber
+\end{equation}
+Therefore:
+\begin{equation}
+    \pi_{i} = \sum_{l} w_l 
+    e^{\delta_{li}/(1-\lambda)} \pi_{lc} \left(\frac{\pi_{l0}}{\pi_{lc}}\right)^{\frac{1}{1-\lambda}}
+\end{equation}
+As we know, $\delta_{lj} = \delta_{j}+ \eta_{lj}$. So, taking logs:
+\begin{equation}
+\boxed{
+    \delta_{i} = (1-\lambda) \left[\log \pi_i - \log \left(\sum_{l} w_l \pi_{lc} \left(\frac{\pi_{l0}}{\pi_{lc}}\right)^{\frac{1}{1-\lambda}} \exp\left\{\frac{\eta_{li}}{1-\lambda}\right\}\right)\right]}
+\end{equation}
+So, this equation relates the mean utility of alternative $i$ to the market shares. Notice that, if $\eta_{li}$ was 0, or observable, this equation was exactly Berry's inverted market shares. Though, as $\eta_{li}$ is random. Therefore, we can come up with the expectations. Notice that all market shares depend on this random variable too. Therefore, using LIE:
+\begin{equation*}
+    E\left[w_l \pi_{lc} \left(\frac{\pi_{l0}}{\pi_{lc}}\right)^{\frac{1}{1-\lambda}} \exp\left\{\frac{\eta_{li}}{1-\lambda}\right\}\right] = E\left[w_l \pi_{lc} \left(\frac{\pi_{l0}}{\pi_{lc}}\right)^{\frac{1}{1-\lambda}} E\left[\exp\left\{\frac{\eta_{li}}{1-\lambda}\right\} \mid \pi_{l0},\pi_{lc}\right]\right]
+\end{equation*}
+
+Now, suppose that there are a lot of products per category
+so that you observe $\pi_{l0},\pi_{lc}$ without any error. Moreover, assume that any single product has a negligible effect on $\pi_{lc}$. The idea is that you can treat the observed values of $\pi_{l0},\pi_{lc}$ and thus $D_{lc}$ as data that are unaffected by your parameters. Then, we only need to solve the inner expectations, without any conditionality. We have:
+\begin{equation*}
+    E\left[\exp\left\{\frac{\eta_{li}}{1-\lambda}\right\} \right] = \frac{1}{\sqrt{2\pi} \sigma_i}\int \exp\left\{\frac{\eta_{li}}{1-\lambda}\right\} \exp\left\{-\frac{1}{2\sigma_i^2}\eta_{li}^2\right\} \, d\eta_{li} = \exp\left(\frac{\sigma_i^2}{2 (1-\lambda)^2}\right)
+\end{equation*}
+Therefore, we can rewrite (9) as follows:
+\begin{equation}
+\boxed{
+    \delta_{i} = (1-\lambda) \left[\log \pi_i - \frac{\sigma_i^2}{2 (1-\lambda)^2} + \log \left(\sum_{l} w_l \pi_{lc} \left(\frac{\pi_{l0}}{\pi_{lc}}\right)^{\frac{1}{1-\lambda}}\right)\right]}
+\end{equation}
+Nice. To get more information on how to estimate the model, I refer to the paper. Though, a quick review of how to estimate is as follows:
+\begin{itemize}
+    \item [(1)] Take some estimates on market shares, population shares, given nesting parameters, and the variations parameters of market heterogeneity, we can use equation (10) to solve for mean utilities.
+    \item[(2)] From (3), as this mean utility is linear, we can use instrumental variable methods to control for price endogeneity, and estimate the parameters of this mean utility.
+\end{itemize}
+
+Notice that one huge issue here is coming up with estimates for $\sigma_i, \lambda$. For that, we can use some other micro-moments in the GMM procedure. 
+
+\setcounter{equation}{0}
+\section*{Part 2: Increase in Product Variety}
+
+Now, suppose that the utility is as follows:
+\begin{equation}
+    u_{ij} = \delta_j + \epsilon_{ij} \,\,\,,\,\,\,
+    \delta_j = x_j \beta - \alpha p_j + \xi_j
+\end{equation}
+
+We only have two nests. All products are in the same nest and the outside product is alone in the other. Also, suppose that the error term is GEV with some nesting parameter $\sigma$ (in other words $\epsilon_{ij} = \zeta_{ic} + (1-\sigma) \varepsilon_{ij}$. Then, again, using the same rationale as in part 1), we can write the choice probabilities as follows:
+
+\begin{align}
+    \forall \,\, i > 0\,\,\,\,\,\, \pi_{i} &= \frac{e^{\delta_i/(1-\sigma)}}{\sum_{j=1}^J e^{\delta_j/(1-\sigma)}} \frac{\left(\sum_{j=1}^J e^{\delta_j/(1-\sigma)}\right)^{1-\sigma}}{1 + \left(\sum_{j=1}^J e^{\delta_j/(1-\sigma)}\right)^{1-\sigma}} \\
+    \pi_0 &= \frac{1}{1 + \left(\sum_{j=1}^J e^{\delta_j/(1-\sigma)}\right)^{1-\sigma}}
+\end{align}
+So, defining $D = \sum_{j=1}^J e^{\delta_j/(1-\sigma)}$, we have:
+\begin{equation}
+    \pi_i = \frac{e^{\delta_i/(1-\sigma)} D^{-\sigma}}{1+D^{1-\sigma}}\,\, ,\,\, \pi_0 = \frac{1}{1+D^{1-\sigma}} 
+\end{equation}
+Then, the ex-ante expected consumer surplus is (dollar value):
+\begin{equation}
+    E[CS] = \frac{1}{\alpha} E[\max_{j} u_{ij}] = \frac{1}{\alpha} \ln \left(1 + \left[\sum_j e^{\delta_j/(1-\sigma)}\right]^{1-\sigma}\right) = \frac{1}{\alpha} \ln \left(1+D^{1-\sigma}\right)
+\end{equation}
+
+Now, suppose that all products are symmetric. In other words, price and mean utilities are the same for all products. Then:
+\begin{equation}
+    \pi = \frac{e^{\delta} J^{-\sigma}}{1+J^{1-\sigma}e^\delta} \,\, ,\,\, \pi_0 = \frac{1}{1+J^{1-\sigma}e^\delta} \,\, ,\,\, E[CS] = \frac{1}{\alpha} \ln \left(1+J^{1-\sigma}e^\delta\right) 
+\end{equation}
+
+Then, the total market demand for all J goods is $Q(p,J)$ (suppose total population is 1):
+\begin{equation}
+    Q(p,J) = \frac{e^{\delta} J^{1 -\sigma}}{1+J^{1-\sigma}e^\delta}
+\end{equation}
+
+Now, the goal is to find the inverse demand function. As we know, $\delta = x\beta - \alpha p + \zeta$. For simplicity, I assume that utility was in form $\delta - \alpha p$. Therefore:
+\begin{equation}
+    P(Q,J) = \frac{\delta + (1-\sigma) \ln(J)}{\alpha} + \frac{1}{\alpha}\ln \left[\frac{1}{Q} - 1\right]
+\end{equation}
+Now, suppose $J$ has increased. Then, the direct effect would be a parallel shift. However, an increase in $J$ would affect $Q$ too. Therefore, the total effect is not just a parallel shift.
+
+Now, let us see how this will affect CS. From (6), we know that:
+
+\begin{equation}
+    \frac{d CS}{d J} = - Q \frac{d p}{d J} + \frac{1-\sigma}{\alpha} \frac{Q}{J+1} = - Q \frac{d p}{d J} + \frac{1-\sigma}{\alpha} q_{j+1}
+\end{equation}
+
+So, the total effect of this new addition to CS depends on the following:
+\begin{equation}
+    \text{Increase in CS} \Leftrightarrow q_{j+1} \geq \frac{\alpha Q}{1-\sigma} \frac{d p}{d J}
+\end{equation}
+
 \end{document}
